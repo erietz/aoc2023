@@ -17,7 +17,8 @@ struct Game {
 
 
 fn main() {
-    part1();
+    // part1();
+    part2();
 }
 
 
@@ -40,6 +41,24 @@ fn part1() {
         if is_possible {
             total += game.id;
         }
+    }
+
+    println!("The total is {}", total);
+}
+
+
+fn part2() {
+    let contents = fs::read_to_string(INPUT_FILE).expect("Failed to read input file");
+
+    let mut total = 0;
+    for line in contents.trim_end().split("\n") {
+        let game = parse_game(line);
+        // println!("{:?}", game);
+
+        let red = game.rounds.iter().map(|r| r.red).max().unwrap();
+        let green = game.rounds.iter().map(|r| r.green).max().unwrap();
+        let blue = game.rounds.iter().map(|r| r.blue).max().unwrap();
+        total += red * green * blue;
     }
 
     println!("The total is {}", total);
