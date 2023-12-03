@@ -17,16 +17,19 @@ struct Game {
 
 
 fn main() {
-    // part1();
-    part2();
+    part1();
+    // part2();
 }
 
 
+#[allow(dead_code)]
 fn part1() {
-    let contents = fs::read_to_string(INPUT_FILE).expect("Failed to read input file");
+    // let contents = fs::read_to_string(INPUT_FILE).expect("Failed to read input file");
+    let contents = fs::read_to_string(INPUT_FILE).unwrap();
+    let contents = contents.trim_end();
 
     let mut total = 0;
-    for line in contents.trim_end().split("\n") {
+    for line in contents.split("\n") {
         let game = parse_game(line);
         // println!("{:?}", game);
 
@@ -47,6 +50,7 @@ fn part1() {
 }
 
 
+#[allow(dead_code)]
 fn part2() {
     let contents = fs::read_to_string(INPUT_FILE).expect("Failed to read input file");
 
