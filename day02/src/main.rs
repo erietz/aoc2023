@@ -29,13 +29,13 @@ fn part1() {
     let contents = contents.trim_end();
 
     let mut total = 0;
-    for line in contents.split("\n") {
+    for line in contents.split('\n') {
         let game = parse_game(line);
         // println!("{:?}", game);
 
         let is_possible = game.rounds.iter().fold(true, |acc, curr| {
             if curr.red <= 12 && curr.green <= 13 && curr.blue <= 14 {
-                acc && true
+                acc
             } else {
                 false
             }
@@ -55,7 +55,7 @@ fn part2() {
     let contents = fs::read_to_string(INPUT_FILE).expect("Failed to read input file");
 
     let mut total = 0;
-    for line in contents.trim_end().split("\n") {
+    for line in contents.trim_end().split('\n') {
         let game = parse_game(line);
         // println!("{:?}", game);
 
@@ -72,17 +72,17 @@ fn part2() {
 fn parse_game(line: &str) -> Game {
     let mut rounds: Vec<Round> = Vec::new();
 
-    let parts: Vec<&str> = line.split(":").collect();
+    let parts: Vec<&str> = line.split(':').collect();
     let id = parts[0].replace("Game ", "").parse::<i32>().unwrap();
 
-    for round in parts[1].split(";").map(|x| x.trim()) {
+    for round in parts[1].split(';').map(|x| x.trim()) {
         let mut red = 0;
         let mut green = 0;
         let mut blue = 0;
 
-        let cubes: Vec<&str> = round.split(",").map(|x| x.trim()).collect();
+        let cubes: Vec<&str> = round.split(',').map(|x| x.trim()).collect();
         for cube in cubes {
-            let tmp: Vec<&str> = cube.split(" ").map(|x| x.trim()).collect();
+            let tmp: Vec<&str> = cube.split(' ').map(|x| x.trim()).collect();
             let num_cube = tmp[0].parse::<i32>().unwrap();
             let color_cube = tmp[1];
 
